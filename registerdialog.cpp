@@ -40,9 +40,16 @@ registerdialog::registerdialog(QWidget *parent)
                                       "Name: %1\n"
                                       "Address: %2\n"
                                       "contect: %3\n"
-                                      "Expiry: %4\n");
+                                      "Expiry: %4")
+                                  .arg(name)
+                                  .arg(address)
+                                  .arg(contactNumeber)
+                                  .arg(expry);
+
+            QMessageBox::information(this, "🎉Congrectulation🎉", summary);
+            this->accept();
         }
-        this->accept();
+
     });
 
     connect(ui->registerBtn, &QDialogButtonBox::rejected, this, [this](){
