@@ -24,33 +24,21 @@ registerdialog::registerdialog(QWidget *parent)
         }
 
         long long contactNumeber = contect.toLongLong();
-        members newMember;
-        bool isSuccessFull = newMember.registerUser(name.toStdString(), address.toStdString(), contactNumeber);
-
-        if(isSuccessFull){
-            time_t currectTime = time(0);
-            tm validTill = *localtime(&currectTime);
-            validTill.tm_mon += 1;
-            mktime(&validTill);
-
-            char expry[100];
-            strftime(expry, sizeof(expry), "%d/%m/%Y", &validTill);
-
-            QString summary = QString("🎉Registration Successful!🎉\n\n"
-                                      "Name: %1\n"
-                                      "Address: %2\n"
-                                      "contect: %3\n"
-                                      "Expiry: %4")
-                                  .arg(name)
-                                  .arg(address)
-                                  .arg(contactNumeber)
-                                  .arg(expry);
-
-            QMessageBox::information(this, "🎉Congrectulation🎉", summary);
-            this->accept();
+        if(contactNumeber == 0 || contactNumeber / 1 == 0){
+            QMessageBox::warning(this, "Error Input", "Wrong Contact Number");
+            this->reject();
+            return;
         }
 
+        members newMember;
+        int userId = newMember.registerUser(name.toStdString(), address.toStdString(), contactNumeber);
+
+        QString summary = QString::fromStdString(newMember.getUserSummary(userId));
+        QMessageBox::information(this, "User Registered!", summary);
+
+        this->accept();
     });
+
 
     connect(ui->registerBtn, &QDialogButtonBox::rejected, this, [this](){
         this->reject();
