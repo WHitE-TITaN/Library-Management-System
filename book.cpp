@@ -102,23 +102,27 @@ int book::dateCalculator(tm date){
     return 0;
 }
 
-void book::allIssuers(){
+#include <sstream> // 💬 for stringstream!
+
+string book::allIssuers(){
     members personalDetail;
+    stringstream ss;  // Create a stringstream
 
     for(auto person : issures){
 
-        cout<<"book - "<<bookName<<"\n"
-             <<"id - "<<person.first<<"\n";
-
+        ss << "book - " << bookName << "\n"
+           << "id - " << person.first << "\n";
 
         personalDetail.isValidMember(person.first);
 
-        cout<<"From - "<<person.second.first.tm_mday<<" / "
-             <<person.second.first.tm_mon<<" / "
-             <<person.second.first.tm_year<<"\n";
+        ss << "From - " << person.second.first.tm_mday << " / "
+           << person.second.first.tm_mon << " / "
+           << person.second.first.tm_year << "\n";
 
-        cout<<"To - "<<person.second.second.tm_mday<<" / "
-             <<person.second.first.tm_mon<<" / "
-             <<person.second.second.tm_year<<"\n";
+        ss << "To - " << person.second.second.tm_mday << " / "
+           << person.second.second.tm_mon << " / "
+           << person.second.second.tm_year << "\n";
     }
+
+    return ss.str(); // Return the entire built string
 }

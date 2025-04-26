@@ -4,6 +4,7 @@
 #include "issuebook.h"
 #include "registerdialog.h"
 #include "additionofbook.h"
+#include "allissuers.h"
 
 #include <QMessageBox>
 #include <QDialog>
@@ -45,6 +46,11 @@ MainWindow::MainWindow(QWidget *parent)
         else{
             QMessageBox::information(this, "Cancelled", "Cant Issue book");
         }
+    });
+
+    connect(ui->ShowBookDetails, &QPushButton::clicked, this, [this](){
+        allIssuers dialog(this);
+        dialog.exec();
     });
 }
 

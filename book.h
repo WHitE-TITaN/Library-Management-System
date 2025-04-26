@@ -3,6 +3,7 @@
 #include <iostream>
 #include <unordered_map>
 #include <ctime>
+#include <sstream>
 #include "members.h"
 #include <string>
 #include <bitset>
@@ -24,5 +25,5 @@ public:
 
     bool issuedTo(int id);
     bool addNewBook(string name, int total_count);
-    void allIssuers();
+    string allIssuers();
 };

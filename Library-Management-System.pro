@@ -10,7 +10,9 @@ CONFIG += c++17
 
 SOURCES += \
     additionofbook.cpp \
+    allissuers.cpp \
     book.cpp \
+    informationWareHouse.cpp \
     issuebook.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -20,6 +22,7 @@ SOURCES += \
 
 HEADERS += \
     additionofbook.h \
+    allissuers.h \
     issuebook.h \
     mainwindow.h \
     book.h \
@@ -30,6 +33,7 @@ HEADERS += \
 
 FORMS += \
     additionofbook.ui \
+    allissuers.ui \
     issuebook.ui \
     mainwindow.ui \
     registerdialog.ui
