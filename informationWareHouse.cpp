@@ -6,15 +6,7 @@ informationWareHouse::informationWareHouse()
 {
 }
 
-bool informationWareHouse::addBook(){
-    string bookName;
-    cout<<"Name of the new Book /- ";
-    getline(cin, bookName);
-
-    int totalCount;
-    cout<<"number of books avilable /- ";
-    cin>>totalCount; cin.ignore();
-
+bool informationWareHouse::addBook(string bookName, int totalCount){
     book *obj = new book();
     obj->addNewBook(bookName, totalCount);
 
@@ -29,11 +21,11 @@ bool informationWareHouse::issueBook(string bookName, int id){
     auto ptrToBook = allBooks.find(bookName);
 
     if(ptrToBook == allBooks.end()){
-        cout<<"$ Book not avialble";
+        cout<<"$ Book not avialble\n";
         return false;
     }
 
-    members *issueBook;
+    members *issueBook = new members();
     if(!issueBook->canIssueBook(id, bookName)){
         return false;
     }
@@ -44,7 +36,7 @@ bool informationWareHouse::issueBook(string bookName, int id){
     }
     issueBook->haveIssued(id, bookName);
 
-    delete issueBook, requiredBook;
+    delete issueBook;
     return true;
 }
 

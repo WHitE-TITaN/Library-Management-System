@@ -35,6 +35,11 @@ IssueBook::IssueBook(QWidget *parent)
             QMessageBox::information(this, "successfull", "book Issded to user for 15 days");
             this->accepted();
         }
+        else{
+            QMessageBox::warning(this, "failed", "Internal Error");
+            this->rejected();
+            return;
+        }
     });
 }
 

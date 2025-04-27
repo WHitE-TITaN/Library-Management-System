@@ -9,7 +9,7 @@ public:
     informationWareHouse();
     ~informationWareHouse();
 
-    bool addBook();
+    bool addBook(string bookName, int totalCount);
     bool issueBook(string bookname, int id); // to develop
     string allIssuers(string bookName);
 };

@@ -29,7 +29,7 @@ bool book::issuedTo(int id){
     tm date = *localtime(&systemDate);
 
     auto locator = issures.find(id);
-    members *issueBook;
+    members *issueBook = new members();
 
     if(locator == issures.end()){
         tm issueExpireDate = date;
@@ -113,7 +113,7 @@ string book::allIssuers(){
         ss << "book - " << bookName << "\n"
            << "id - " << person.first << "\n";
 
-        personalDetail.isValidMember(person.first);
+        ss<<personalDetail.getUserSummary(person.first);
 
         ss << "From - " << person.second.first.tm_mday << " / "
            << person.second.first.tm_mon << " / "
@@ -124,5 +124,6 @@ string book::allIssuers(){
            << person.second.second.tm_year << "\n";
     }
 
+    cout<<ss.str();
     return ss.str(); // Return the entire built string
 }

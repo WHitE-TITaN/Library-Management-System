@@ -1,7 +1,7 @@
 #include "additionofbook.h"
 #include "ui_additionofbook.h"
 
-#include "book.h"
+#include "informationWareHouse.h"
 #include <QMessageBox>
 #include <QDialogButtonBox>
 #include <QDialog>
@@ -26,8 +26,8 @@ AdditionOfBook::AdditionOfBook(QWidget *parent)
             return;
         }
 
-        book newBook;
-        bool operationStat = newBook.addNewBook(bookName.toStdString(), actualCount);
+        informationWareHouse newBook;
+        bool operationStat = newBook.addBook(bookName.toStdString(), actualCount);
         if(operationStat){
             QString summary = QString("Name - %1\n"
                                       "Total count - %2")
