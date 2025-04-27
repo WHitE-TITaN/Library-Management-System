@@ -29,19 +29,11 @@ bool book::issuedTo(int id){
     tm date = *localtime(&systemDate);
 
     auto locator = issures.find(id);
-    members *issueBook = new members();
 
     if(locator == issures.end()){
         tm issueExpireDate = date;
-        int issuedate = dateCalculator(date);
+        issueExpireDate.tm_mday += 15;
 
-        if(issuedate != 0){
-            issueExpireDate.tm_mon += 1;
-            issueExpireDate.tm_mday += issuedate;
-        }
-        else{
-            issueExpireDate.tm_mday += 15;
-        }
         mktime(&issueExpireDate);
         //✨ mktime adjusts the tm struct so that if days/months go over their limit,
         // it carries over to the next month/year automatically.
@@ -60,7 +52,7 @@ bool book::issuedTo(int id){
     cout<<"\n* User already have this book *\n";
     cout<<"* Till - "<<locator->second.second.tm_mday<<" / "
          <<locator->second.second.tm_mon<<" / "
-         <<1900 + locator->second.second.tm_year;
+         <<locator->second.second.tm_year;
 
     return false;
 }
@@ -69,51 +61,16 @@ book::~book()
 {
 }
 
-
-
-
-//calculate date
-int book::dateCalculator(tm date){
-    bitset<32> byte(date.tm_mon);
-
-    if(date.tm_mday + 15 <= 28){
-        return 0;
-    }
-
-    //if leap year;
-    if((date.tm_year % 4 == 0 && date.tm_year % 100 != 0) || (date.tm_year % 400 == 0)){
-        if(date.tm_mon == 1 && (date.tm_mday + 15) > 29){
-            return 29-date.tm_mday;
-        }
-    }
-
-    //if not leapYear
-    if(date.tm_mon == 1 && (date.tm_mday + 15) > 28){
-        return 28-date.tm_mday;
-    }
-
-    if(date.tm_mon < 7 && byte[0] != 1 && (date.tm_mday + 15) > 31){
-        return 31 - date.tm_mday;
-    }
-    if(date.tm_mon >= 7 && byte[0] == 1 && (date.tm_mday + 15) > 30){
-        return 30 - date.tm_mday;
-    }
-
-    return 0;
-}
-
 #include <sstream> // 💬 for stringstream!
 
 string book::allIssuers(){
     members personalDetail;
     stringstream ss;  // Create a stringstream
 
+    ss << "book - " << bookName << "\n";
     for(auto person : issures){
 
-        ss << "book - " << bookName << "\n"
-           << "id - " << person.first << "\n";
-
-        ss<<personalDetail.getUserSummary(person.first);
+        ss<<personalDetail.getUserSummary(person.first)<<"\n"<<"BOOK ISSUE FROM & TILL - \n";
 
         ss << "From - " << person.second.first.tm_mday << " / "
            << person.second.first.tm_mon << " / "
@@ -121,7 +78,7 @@ string book::allIssuers(){
 
         ss << "To - " << person.second.second.tm_mday << " / "
            << person.second.second.tm_mon << " / "
-           << person.second.second.tm_year << "\n";
+           << person.second.second.tm_year << "\n\n";
     }
 
     cout<<ss.str();
