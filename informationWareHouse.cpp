@@ -54,3 +54,15 @@ string informationWareHouse::allIssuers(string bookName){
     }
     return locator->second->allIssuers();
 }
+
+
+int informationWareHouse::returningBook(string& bookName, int id){
+    auto locator = allBooks.find(bookName);
+    if(locator == allBooks.end()){
+        return -1;
+    }
+    else{
+        return locator->second->returnBook(id);
+    }
+    return -1;
+}

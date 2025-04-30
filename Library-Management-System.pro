@@ -16,9 +16,9 @@ SOURCES += \
     issuebook.cpp \
     main.cpp \
     mainwindow.cpp \
-    LibraryBookSystem.cpp \
     members.cpp \
-    registerdialog.cpp
+    registerdialog.cpp \
+    returnbook.cpp
 
 HEADERS += \
     additionofbook.h \
@@ -29,14 +29,16 @@ HEADERS += \
     informationWareHouse.h \
     inLibrary.h \
     members.h \
-    registerdialog.h
+    registerdialog.h \
+    returnbook.h
 
 FORMS += \
     additionofbook.ui \
     allissuers.ui \
     issuebook.ui \
     mainwindow.ui \
-    registerdialog.ui
+    registerdialog.ui \
+    returnbook.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

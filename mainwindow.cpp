@@ -5,6 +5,7 @@
 #include "registerdialog.h"
 #include "additionofbook.h"
 #include "allissuers.h"
+#include "returnbook.h"
 
 #include <QMessageBox>
 #include <QDialog>
@@ -14,11 +15,6 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-
-    connect(ui->check1, &QPushButton::clicked, this, []() {
-        QMessageBox::information(nullptr, "Hello", "Check Was SuccessFull procide with Process\n"
-                                                   "✅✅✅!");
-    });
 
     connect(ui->registerUserButton, &QPushButton::clicked, this, [this](){
         registerdialog dialog(this); // parent set to main window
@@ -50,6 +46,11 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect(ui->ShowBookDetails, &QPushButton::clicked, this, [this](){
         allIssuers dialog(this);
+        dialog.exec();
+    });
+
+    connect(ui->returnBookButton, &QPushButton::clicked, this, [this](){
+        returnBook dialog(this);
         dialog.exec();
     });
 }

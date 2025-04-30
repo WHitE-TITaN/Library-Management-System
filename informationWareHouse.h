@@ -12,4 +12,6 @@ public:
     bool addBook(string bookName, int totalCount);
     bool issueBook(string bookname, int id); // to develop
     string allIssuers(string bookName);
+
+    int returningBook(string& bookName, int id);
 };
