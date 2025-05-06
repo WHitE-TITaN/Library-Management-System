@@ -12,9 +12,9 @@ allIssuers::allIssuers(QWidget *parent)
     ui->setupUi(this);
 
     connect(ui->submmitButtonBox, &QDialogButtonBox::accepted, this, [this](){
-        QString bookName = ui->nameEdit->text();
+        QString bookName = ui->nameEdit_2->text();
 
-        if(bookName.isEmpty()){
+        if(bookName.trimmed().isEmpty()){
             QMessageBox::warning(this, "Input Error", "All Field required to be filled");
             this->rejected();
             return;
@@ -22,6 +22,13 @@ allIssuers::allIssuers(QWidget *parent)
 
         informationWareHouse bookDetails;
         string allDetails = bookDetails.allIssuers(bookName.toStdString());
+
+        QString allDetailsStr = QString::fromStdString(allDetails);
+        if (allDetailsStr.trimmed().isEmpty()) {
+            QMessageBox::information(this, "Issuers", "No issuers found for this book.");
+        } else {
+            QMessageBox::information(this, "Issuers", allDetailsStr);
+        }
         QMessageBox::information(this, "Issuers", QString::fromStdString(allDetails));
     });
 }

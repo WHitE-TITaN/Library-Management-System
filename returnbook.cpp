@@ -13,10 +13,11 @@ returnBook::returnBook(QWidget *parent)
 
     this->connect(ui->submmitBox, &QDialogButtonBox::accepted, this, [this](){
         QString name = ui->nameEdit->text();
-        QString id = ui->nameEdit->text();
+        QString id = ui->idEdit->text();
 
-        if(name.isEmpty() || id.isEmpty()){
+        if(name.trimmed().isEmpty() || id.trimmed(). isEmpty()){
             QMessageBox::warning(this, "Input Error", "all fields Requires to be filed");
+            return;
         }
 
         int userId = id.toInt();
