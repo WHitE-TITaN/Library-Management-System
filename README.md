@@ -74,8 +74,5 @@ Late return is calculated based on the difference between the system date and th
 
 Feel free to fork and suggest improvements! New features like search, member history, or database support are welcome.
 
-## 📃 License
-
-MIT License (or your preferred license)
-
----
+## Original LLD
+- https://github.com/WHitE-TITaN/Low-Level-design/tree/Master/Library-Book-System
